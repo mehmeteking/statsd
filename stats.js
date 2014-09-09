@@ -189,7 +189,8 @@ config.configFile(process.argv[2], function (config, oldConfig) {
         var key_str = "";
 
         while (bits[0].indexOf('|') == -1) {
-          key_str += bits.shift();
+          if (bits.length > 0) key_str += bits.shift();
+          else break;
         }
 
         var key = key_str
