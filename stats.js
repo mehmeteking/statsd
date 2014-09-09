@@ -186,10 +186,16 @@ config.configFile(process.argv[2], function (config, oldConfig) {
           l.log(metrics[midx].toString());
         }
         var bits = metrics[midx].toString().split(':');
-        var key = bits.shift()
-                      .replace(/\s+/g, '_')
-                      .replace(/\//g, '-')
-                      .replace(/[^a-zA-Z_\-0-9\.]/g, '');
+        var key_str = "";
+
+        while (bits[0].indexOf('|') == -1) {
+          key_str += bits.shift();
+        }
+
+        var key = key_str
+          .replace(/\s+/g, '_')
+          .replace(/\//g, '-')
+          .replace(/[^a-zA-Z_\-0-9\.]/g, '');
 
         if (keyFlushInterval > 0) {
           if (! keyCounter[key]) {
